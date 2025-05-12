@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Catcher Mini-Game</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #e6f7ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+        }
+        h1 {
+            color: #8e44ad;
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .instructions {
+            background-color: #fff9c4;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #ffd54f;
+        }
+        .operations {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+        .operation {
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: #e3f2fd;
+            font-weight: bold;
+            color: #1565c0;
+        }
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f0f9ff;
+            border-radius: 15px;
+            flex-wrap: wrap;
+        }
+        .game-info div {
+            margin: 5px 10px;
+        }
+        .score, .target-number, .time, .level {
+            font-weight: bold;
+        }
+        .score { color: #e67e22; }
+        .target-number { color: #2980b9; }
+        .time { color: #c0392b; }
+        .level { color: #27ae60; }
+        
+        .game-area {
+            height: 400px;
+            background-color: #f0f9ff;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .basket {
+            position: absolute;
+            bottom: 20px;
+            width: 80px;
+            height: 40px;
+            background-color: #e74c3c;
+            border-radius: 0 0 40px 40px;
+            transition: left 0.1s ease-out;
+            z-index: 10;
+        }
+        .basket:before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: #c0392b;
+            border-radius: 5px;
+        }
+        .falling-item {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            z-index: 5;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .arrow-btn {
+            width: 60px;
+            height: 60px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .arrow-btn:hover {
+            background-color: #2980b9;
+        }
+        .arrow-btn:active {
+            transform: scale(0.95);
+        }
+        .start-btn {
+            padding: 10px 25px;
+            background-color: #ff7b8a;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .start-btn:hover {
+            background-color: #ff5c6f;
+        }
+        .back-btn {
+            display: block;
+            width: max-content;
+            margin: 20px auto;
+            padding: 10px 25px;
+            background-color: #ff7b8a;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+        .back-btn:hover {
+            background-color: #ff5c6f;
+        }
+        .game-over {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 100;
+        }
+        .game-over h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .final-score {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        .restart-btn {
+            padding: 12px 30px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .restart-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Number Catcher</h1>
+        
+        <div class="instructions">
+            <p>Move the basket to catch numbers that will help you reach the target number! Use the arrow keys or buttons below to move.</p>
+            <div class="operations">
+                <span class="operation">Addition (+)</span>
+                <span class="operation">Subtraction (-)</span>
+                <span class="operation">Multiplication (×)</span>
+            </div>
+        </div>
+        
+        <div class="game-info">
+            <div>Score: <span class="score" id="scoreDisplay">0</span></div>
+            <div>Target: <span class="target-number" id="targetDisplay">10</span></div>
+            <div>Current: <span class="target-number" id="currentDisplay">0</span></div>
+            <div>Time: <span class="time" id="timeDisplay">60</span>s</div>
+            <div>Level: <span class="level" id="levelDisplay">1</span></div>
+        </div>
+        
+        <div class="game-area" id="gameArea">
+            <div class="basket" id="basket"></div>
+            <div class="game-over" id="gameOver">
+                <h2>Game Over!</h2>
+                <div class="final-score">Your score: <span id="finalScore">0</span></div>
+                <button class="restart-btn" id="restartBtn">Play Again</button>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="arrow-btn" id="leftBtn">←</button>
+            <button class="start-btn" id="startBtn">Start Game</button>
+            <button class="arrow-btn" id="rightBtn">→</button>
+        </div>
+        
+        <a href="index.html" class="back-btn">Back to Fun Learning World</a>
+    </div>
+
+    <script>
+        // Game elements
+        const gameArea = document.getElementById('gameArea');
+        const basket = document.getElementById('basket');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const targetDisplay = document.getElementById('targetDisplay');
+        const currentDisplay = document.getElementById('currentDisplay');
+        const timeDisplay = document.getElementById('timeDisplay');
+        const levelDisplay = document.getElementById('levelDisplay');
+        const startBtn = document.getElementById('startBtn');
+        const leftBtn = document.getElementById('leftBtn');
+        const rightBtn = document.getElementById('rightBtn');
+        const gameOver = document.getElementById('gameOver');
+        const finalScore = document.getElementById('finalScore');
+        const restartBtn = document.getElementById('restartBtn');
+        
+        // Game variables
+        let score = 0;
+        let targetNumber = 10;
+        let currentNumber = 0;
+        let timeRemaining = 60;
+        let level = 1;
+        let gameRunning = false;
+        let basketPos = 50; // percentage
+        let fallingItems = [];
+        let gameTimer;
+        let itemTimer;
+        let animationFrameId;
+        
+        // Initialize the game
+        function init() {
+            // Set initial basket position
+            basket.style.left = basketPos + '%';
+            basket.style.transform = 'translateX(-50%)';
+            
+            // Reset game variables
+            score = 0;
+            targetNumber = 10;
+            currentNumber = 0;
+            timeRemaining = 60;
+            level = 1;
+            fallingItems = [];
+            
+            // Update displays
+            scoreDisplay.textContent = score;
+            targetDisplay.textContent = targetNumber;
+            currentDisplay.textContent = currentNumber;
+            timeDisplay.textContent = timeRemaining;
+            levelDisplay.textContent = level;
+            
+            // Hide game over screen
+            gameOver.style.display = 'none';
+            
+            // Enable start button
+            startBtn.disabled = false;
+            startBtn.textContent = 'Start Game';
+        }
+        
+        // Start the game
+        function startGame() {
+            if (gameRunning) return;
+            
+            // Reset game state
+            init();
+            
+            // Update UI
+            startBtn.disabled = true;
+            startBtn.textContent = 'Game Running';
+            gameRunning = true;
+            
+            // Start game timers
+            gameTimer = setInterval(updateTimer, 1000);
+            itemTimer = setInterval(createFallingItem, 1500 - (level * 100));
+            
+            // Start game loop
+            animationFrameId = requestAnimationFrame(gameLoop);
+        }
+        
+        // Update game timer
+        function updateTimer() {
+            timeRemaining--;
+            timeDisplay.textContent = timeRemaining;
+            
+            if (timeRemaining <= 0) {
+                endGame();
+            }
+        }
+        
+        // Create a falling item
+        function createFallingItem() {
+            if (!gameRunning) return;
+            
+            // Choose operation and value
+            const operations = ['+', '-', '×'];
+            const operation = operations[Math.floor(Math.random() * operations.length)];
+            
+            let value;
+            switch (operation) {
+                case '+': value = Math.floor(Math.random() * 5) + 1; break; // 1-5
+                case '-': value = Math.floor(Math.random() * 3) + 1; break; // 1-3
+                case '×': value = Math.floor(Math.random() * 3) + 2; break; // 2-4
+            }
+            
+            // Create element
+            const item = document.createElement('div');
+            item.className = 'falling-item';
+            item.textContent = operation + value;
+            
+            // Set random position
+            const posX = Math.floor(Math.random() * 80) + 10; // 10-90%
+            item.style.left = posX + '%';
+            item.style.top = '-40px';
+            
+            // Add to game area
+            gameArea.appendChild(item);
+            
+            // Add to falling items array
+            fallingItems.push({
+                element: item,
+                posX: posX,
+                posY: -40,
+                operation: operation,
+                value: value,
+                speed: 1 + (level * 0.5)
+            });
+        }
+        
+        // Game loop
+        function gameLoop() {
+            if (!gameRunning) return;
+            
+            // Update falling items
+            updateFallingItems();
+            
+            // Continue loop
+            animationFrameId = requestAnimationFrame(gameLoop);
+        }
+        
+        // Update falling items
+        function updateFallingItems() {
+            const gameAreaRect = gameArea.getBoundingClientRect();
+            const basketRect = basket.getBoundingClientRect();
+            
+            // Loop through all items
+            for (let i = fallingItems.length - 1; i >= 0; i--) {
+                const item = fallingItems[i];
+                
+                // Move item down
+                item.posY += item.speed;
+                item.element.style.top = item.posY + 'px';
+                
+                // Check if caught by basket
+                const itemRect = item.element.getBoundingClientRect();
+                
+                // Check if item is within basket horizontally and at bottom of screen
+                if (itemRect.bottom >= basketRect.top &&
+                    itemRect.left <= basketRect.right &&
+                    itemRect.right >= basketRect.left &&
+                    itemRect.bottom <= basketRect.bottom + 20) {
+                    
+                    // Item caught! Process it
+                    processItem(item.operation, item.value);
+                    
+                    // Remove item
+                    item.element.remove();
+                    fallingItems.splice(i, 1);
+                    
+                    // Show visual feedback
+                    createCatchEffect(itemRect.left - gameAreaRect.left, itemRect.top - gameAreaRect.top);
+                    
+                    continue;
+                }
+                
+                // Check if item out of bounds
+                if (item.posY > gameAreaRect.height) {
+                    item.element.remove();
+                    fallingItems.splice(i, 1);
+                }
+            }
+            
+            // Check if target reached
+            if (currentNumber === targetNumber) {
+                levelUp();
+            }
+        }
+        
+        // Process caught item
+        function processItem(operation, value) {
+            // Apply operation
+            switch (operation) {
+                case '+':
+                    currentNumber += value;
+                    break;
+                case '-':
+                    currentNumber -= value;
+                    break;
+                case '×':
+                    currentNumber *= value;
+                    break;
+            }
+            
+            // Update display
+            currentDisplay.textContent = currentNumber;
+        }
+        
+        // Level up
+        function levelUp() {
+            // Award points
+            score += level * 10;
+            scoreDisplay.textContent = score;
+            
+            // Increase level
+            level++;
+            levelDisplay.textContent = level;
+            
+            // Reset current number
+            currentNumber = 0;
+            currentDisplay.textContent = currentNumber;
+            
+            // Set new target
+            if (level === 2) {
+                targetNumber = Math.floor(Math.random() * 20) + 10; // 10-30
+            } else if (level >= 3) {
+                targetNumber = Math.floor(Math.random() * 30) + 20; // 20-50
+            } else {
+                targetNumber = Math.floor(Math.random() * 10) + 5; // 5-15
+            }
+            targetDisplay.textContent = targetNumber;
+            
+            // Make items fall faster
+            clearInterval(itemTimer);
+            itemTimer = setInterval(createFallingItem, 1500 - (level * 100));
+            
+            // Visual feedback
+            gameArea.style.backgroundColor = '#d4edda';
+            setTimeout(() => {
+                gameArea.style.backgroundColor = '#f0f9ff';
+            }, 500);
+        }
+        
+        // Create visual feedback when catching an item
+        function createCatchEffect(x, y) {
+            const effect = document.createElement('div');
+            effect.style.position = 'absolute';
+            effect.style.left = x + 'px';
+            effect.style.top = y + 'px';
+            effect.style.color = '#2ecc71';
+            effect.style.fontSize = '24px';
+            effect.style.fontWeight = 'bold';
+            effect.style.zIndex = '20';
+            effect.style.opacity = '1';
+            effect.style.transition = 'all 0.5s';
+            effect.textContent = '+1';
+            
+            gameArea.appendChild(effect);
+            
+            // Animate and remove
+            setTimeout(() => {
+                effect.style.transform = 'translateY(-30px)';
+                effect.style.opacity = '0';
+                
+                setTimeout(() => {
+                    effect.remove();
+                }, 500);
+            }, 10);
+        }
+        
+        // Move basket left
+        function moveBasketLeft() {
+            if (!gameRunning) return;
+            basketPos = Math.max(10, basketPos - 5);
+            basket.style.left = basketPos + '%';
+        }
+        
+        // Move basket right
+        function moveBasketRight() {
+            if (!gameRunning) return;
+            basketPos = Math.min(90, basketPos + 5);
+            basket.style.left = basketPos + '%';
+        }
+        
+        // End game
+        function endGame() {
+            gameRunning = false;
+            
+            // Clear timers
+            clearInterval(gameTimer);
+            clearInterval(itemTimer);
+            cancelAnimationFrame(animationFrameId);
+            
+            // Update UI
+            startBtn.disabled = false;
+            startBtn.textContent = 'Start Game';
+            
+            // Show game over screen
+            finalScore.textContent = score;
+            gameOver.style.display = 'flex';
+            
+            // Award points to rewards system if it exists
+            if (typeof awardPoints === 'function') {
+                awardPoints(score);
+                
+                // Award badge if score is high enough
+                if (score >= 100 && typeof awardBadge === 'function') {
+                    awardBadge('Math Star');
+                }
+            }
+        }
+        
+        // Event listeners
+        startBtn.addEventListener('click', startGame);
+        restartBtn.addEventListener('click', startGame);
+        leftBtn.addEventListener('click', moveBasketLeft);
+        rightBtn.addEventListener('click', moveBasketRight);
+        
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                moveBasketLeft();
+            } else if (e.key === 'ArrowRight') {
+                moveBasketRight();
+            }
+        });
+        
+        // Touch controls for mobile
+        let touchStartX = 0;
+        gameArea.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+        
+        gameArea.addEventListener('touchmove', (e) => {
+            if (!gameRunning) return;
+            
+            const touchX = e.touches[0].clientX;
+            const diff = touchX - touchStartX;
+            
+            if (diff < -30) {
+                moveBasketLeft();
+                touchStartX = touchX;
+            } else if (diff > 30) {
+                moveBasketRight();
+                touchStartX = touchX;
+            }
+            
+            e.preventDefault();
+        });
+        
+        // Initialize game on page load
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>

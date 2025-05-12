@@ -1,0 +1,232 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e6f2ff;
+    background-image: radial-gradient(#ffffff 2px, transparent 2px);
+    background-size: 30px 30px;
+}
+
+.header {
+    background-color: #ffb6c1;
+    padding: 15px;
+    text-align: center;
+    border-radius: 15px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: #6a0dad;
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.star {
+    position: absolute;
+    color: #ffd700;
+    font-size: 2rem;
+}
+
+.star:nth-child(1) {
+    top: 10px;
+    left: 20px;
+}
+
+.star:nth-child(2) {
+    bottom: 10px;
+    right: 40px;
+}
+
+.star:nth-child(3) {
+    top: 20px;
+    right: 20px;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 20px 10px;
+}
+
+.nav-button {
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-button:hover {
+    transform: scale(1.05);
+    background-color: #4cae4c;
+}
+
+.nav-button.active {
+    background-color: #106e10;
+}
+
+.content-area {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.video-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.video-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 150px;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-info {
+    padding: 10px;
+}
+
+.video-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.video-description {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.category-btn {
+    padding: 8px 15px;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.category-btn.active {
+    background-color: #4cae4c;
+    color: white;
+}
+
+.video-player-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-player-content {
+    width: 80%;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.close-video-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.video-iframe {
+    width: 100%;
+    height: 450px;
+    border: none;
+}
+
+.back-to-menu {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #f0ad4e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .video-iframe {
+        height: 300px;
+    }
+    
+    .nav-button {
+        padding: 10px 15px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-iframe {
+        height: 200px;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+}

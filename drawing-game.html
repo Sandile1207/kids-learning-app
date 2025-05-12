@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Learning World - Drawing Game</title>
+    <link rel="stylesheet" href="drawing-game.css">
+</head>
+<body>
+    <div class="nav-buttons">
+        <button class="nav-button" onclick="window.location.href='index.html'">Home</button>
+        <button class="nav-button active">Drawing</button>
+    </div>
+    <div class="drawing-container">
+        <div class="drawing-header">
+            <h2>Draw It!</h2>
+            <div class="word-display">
+                <div class="word" id="wordToDrawDisplay">ball</div>
+                <div class="prompt">Can you draw this?</div>
+            </div>
+            <!-- Reference image will be dynamically added here -->
+        </div>
+
+        <div class="canvas-area">
+            <canvas id="drawingCanvas" width="600" height="400"></canvas>
+            
+            <div class="drawing-controls">
+                <div class="color-palette">
+                    <div class="color-btn black selected" data-color="#000000"></div>
+                    <div class="color-btn red" data-color="#FF0000"></div>
+                    <div class="color-btn blue" data-color="#0000FF"></div>
+                    <div class="color-btn green" data-color="#008000"></div>
+                    <div class="color-btn yellow" data-color="#FFFF00"></div>
+                    <div class="color-btn purple" data-color="#800080"></div>
+                </div>
+                
+                <div class="brush-size">
+                    <label>Brush Size:</label>
+                    <input type="range" id="brushSize" min="1" max="20" value="5">
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="clearBtn" class="btn">Clear</button>
+                    <button id="saveBtn" class="btn">Save</button>
+                    <button id="nextWordBtn" class="btn">Next Word</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="savedDrawingsContainer" class="saved-drawings">
+        <h3>My Drawings</h3>
+        <div id="savedDrawings" class="drawings-gallery"></div>
+    </div>
+
+    <script src="drawing-game.js"></script>
+</body>
+</html>

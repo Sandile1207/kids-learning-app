@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Learning for Kids</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fun Learning World <i class="fas fa-star"></i></h1>
+            <div class="character">
+                <div class="character-face">
+                    <div class="eyes">
+                        <div class="eye"></div>
+                        <div class="eye"></div>
+                    </div>
+                    <div class="mouth"></div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="profile-container">
+                <div class="current-profile">
+                    <div class="profile-avatar" id="current-avatar">
+                        <img src="assets/images/avatars/default.png" alt="Default Avatar">
+                    </div>
+                    <div class="profile-info">
+                        <span id="profile-name">Guest</span>
+                        <span class="profile-level">Level: <span id="profile-level">1</span></span>
+                    </div>
+                </div>
+                <button id="profile-toggle" class="profile-button" aria-label="Toggle Profile Menu">
+                    <i class="fas fa-user-circle"></i>
+                    <span class="sr-only">Profile</span>
+                </button>
+            </div>
+
+            <!-- Add this to your profile section -->
+<div class="level-indicator">
+    Level: <span id="userLevel">1</span>
+</div>
+
+            <div id="profile-modal" class="profile-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>My Profile</h3>
+                        <button id="close-profile" class="close-button">&times;</button>
+                    </div>
+
+                    <div class="profile-tabs">
+                        <button class="tab-button active" data-tab="select-profile">Select Profile</button>
+                        <button class="tab-button" data-tab="create-profile">Create Profile</button>
+                        <button class="tab-button" data-tab="achievements">Achievements</button>
+                    </div>
+
+                    <div id="select-profile" class="tab-content active">
+                        <h4>Choose Your Profile</h4>
+                        <div class="profiles-list" id="profiles-list">
+                            <!-- Profiles will be added here dynamically -->
+                        </div>
+                    </div>
+
+                    <div id="create-profile" class="tab-content">
+                        <h4>Create New Profile</h4>
+                        <div class="create-form">
+                            <div class="form-group">
+                                <label for="new-name">Your Name:</label>
+                                <input type="text" id="new-name" maxlength="12" placeholder="Enter your name">
+                            </div>
+                            <div class="form-group">
+                                <label>Choose Avatar:</label>
+                                <div class="avatar-selection" id="avatar-selection">
+                                    <div class="avatar-option selected" data-avatar="avatar1">
+                                        <img src="assets/images/avatars/avatar1.png" alt="Avatar 1">
+                                    </div>
+                                    <div class="avatar-option" data-avatar="avatar2">
+                                        <img src="assets/images/avatars/avatar2.png" alt="Avatar 2">
+                                    </div>
+                                    <div class="avatar-option" data-avatar="avatar3">
+                                        <img src="assets/images/avatars/avatar3.png" alt="Avatar 3">
+                                    </div>
+                                    <div class="avatar-option" data-avatar="avatar4">
+                                        <img src="assets/images/avatars/avatar4.png" alt="Avatar 4">
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="create-profile-btn" class="create-button">Create Profile</button>
+                        </div>
+                    </div>
+
+                    <div id="achievements" class="tab-content">
+                        <h4>My Achievements</h4>
+                        <div class="badges-container" id="badges-container">
+                            <div class="badge locked" id="math-badge-5">
+                                <div class="badge-icon"><i class="fas fa-calculator"></i></div>
+                                <div class="badge-info">
+                                    <div class="badge-name">Math Wizard</div>
+                                    <div class="badge-desc">Score 5 math questions correctly</div>
+                                </div>
+                            </div>
+                            <div class="badge locked" id="quiz-badge-5">
+                                <div class="badge-icon"><i class="fas fa-question"></i></div>
+                                <div class="badge-info">
+                                    <div class="badge-name">Quiz Champion</div>
+                                    <div class="badge-desc">Score 5 quiz answers correctly</div>
+                                </div>
+                            </div>
+                            <div class="badge locked" id="wordscramble-badge-5">
+                                <div class="badge-icon"><i class="fas fa-random"></i></div>
+                                <div class="badge-info">
+                                    <div class="badge-name">Word Wizard</div>
+                                    <div class="badge-desc">Unscramble 5 words correctly</div>
+                                </div>
+                            </div>
+                            <div class="badge locked" id="truefalse-badge-5">
+                                <div class="badge-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="badge-info">
+                                    <div class="badge-name">Fact Checker</div>
+                                    <div class="badge-desc">Answer 5 true/false questions correctly</div>
+                                </div>
+                            </div>
+                            <div class="badge locked" id="spelling-badge-5">
+                                <div class="badge-icon"><i class="fas fa-spell-check"></i></div>
+                                <div class="badge-info">
+                                    <div class="badge-name">Spelling Bee</div>
+                                    <div class="badge-desc">Spell 5 words correctly</div>
+                                </div>
+                            </div>
+                            <div class="badge locked" id="color-badge-5">
+                                <div class="badge-icon"><i class="fas fa-palette"></i></div>
+                                <div class="badge-info">
+                                    <div class="badge-name">Color Expert</div>
+                                    <div class="badge-desc">Identify 5 colors correctly</div>
+                                </div>
+                            </div>
+                            <div class="badge locked" id="animal-badge-5">
+                                <div class="badge-icon"><i class="fas fa-paw"></i></div>
+                                <div class="badge-info">
+                                    <div class="badge-name">Animal Friend</div>
+                                    <div class="badge-desc">Identify 5 animal sounds</div>
+                                </div>
+                            </div>
+                            <div class="badge locked" id="all-activities">
+                                <div class="badge-icon"><i class="fas fa-trophy"></i></div>
+                                <div class="badge-info">
+                                    <div class="badge-name">Explorer</div>
+                                    <div class="badge-desc">Try all activities</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Profile Section -->
+
+        <!-- Add this right after your profile section, before the closing </body> tag -->
+<!-- Bunny Nova Section -->
+<div class="bunny-nova-section">
+    <div class="bunny-container">
+      <div class="bunny">
+        <div class="bunny-head">
+          <div class="bunny-ear ear-left"></div>
+          <div class="bunny-ear ear-right"></div>
+          <div class="bunny-face">
+            <div class="bunny-eye eye-left"></div>
+            <div class="bunny-eye eye-right"></div>
+            <div class="bunny-nose"></div>
+          </div>
+        </div>
+        <div class="bunny-body"></div>
+      </div>
+      
+      <div class="speech-bubble" id="bunny-speech">
+        Hi there! I'm Bunny Nova! I'll help you explore Fun Learning World!
+      </div>
+    </div>
+    
+    <div class="bunny-controls">
+      <button id="intro-btn">Introduction</button>
+      <button id="features-btn">Features</button>
+      <button id="outcomes-btn">Learning Outcomes</button>
+    </div>
+    
+    <div id="bunny-features" class="bunny-features hidden"></div>
+    <div id="bunny-outcomes" class="bunny-outcomes hidden"></div>
+  </div>
+
+        <nav>
+            <button class="nav-btn active" data-section="math">Math Fun</button>
+            <button class="nav-btn" data-section="spelling">Spelling</button>
+            <button class="nav-btn" data-section="colors">Colors</button>
+            <button class="nav-btn" data-section="animals">Animals</button>
+            <button class="nav-btn" data-section="flashcards">Flashcards</button>
+            <button class="nav-btn" data-section="matching">Matching</button>
+            <button class="nav-btn" data-section="quiz">Quiz</button>
+            <button class="nav-btn" data-section="truefalse">True/False</button>
+            <button class="nav-btn" data-section="wordscramble">Word Scramble</button>
+            <button class="nav-button" onclick="window.location.href='videos.html'">VIDEOS</button>
+            <button class="nav-button" onclick="window.location.href='drawing-game.html'">DRAWING</button>
+            <a href="number-catcher.html" class="activity-button"><div class="button-text">NUMBER CATCHER</div></a>
+            <button class="nav-button" onclick="window.location.href='music_notes.html'">MUSIC NOTES</button>
+            <button class="nav-button" onclick="window.location.href='story_time.html'">STORY TIME</button>
+            
+
+            
+        </nav>
+
+        
+        
+        <div class="badge locked" id="flashcard-badge-5">
+            <div class="badge-icon"><i class="fas fa-copy"></i></div>
+            <div class="badge-info">
+                <div class="badge-name">Flashcard Master</div>
+                <div class="badge-desc">View 5 flashcards</div>
+            </div>
+        </div>
+        <div class="badge locked" id="matching-badge">
+            <div class="badge-icon"><i class="fas fa-th"></i></div>
+            <div class="badge-info">
+                <div class="badge-name">Memory Master</div>
+                <div class="badge-desc">Complete a matching game</div>
+            </div>
+        </div>
+        
+
+        <main>
+            <!-- Math Section -->
+            <section id="math" class="active-section">
+                <h2>Math Adventure</h2>
+                <div class="question-container">
+                    <span id="num1">5</span>
+                    <span id="operator">+</span>
+                    <span id="num2">3</span>
+                    <span>=</span>
+                    <span>
+                        <label for="answer" class="sr-only">Your answer</label>
+                        <input type="number" id="answer" min="0" max="20" aria-label="Enter your answer" placeholder="?">
+                    </span>
+                </div>
+                <button id="check-math">Check Answer</button>
+                <button id="next-math">Next Question</button>
+                <div id="math-result" class="result"></div>
+                <div class="score">Score: <span id="math-score">0</span></div>
+            </section>
+
+            <!-- Spelling Section -->
+            <section id="spelling">
+                <h2>Spelling Bee</h2>
+                <div class="game-container">
+                    <div class="image-container">
+                        <img id="spelling-image" src="images/spelling/default.png" alt="Guess the word">
+                    </div>
+                    <div class="word-container" id="word-container"></div>
+                    <div class="letter-bank" id="letter-bank"></div>
+                    <div id="spelling-result" class="result"></div>
+                    <button id="next-spelling">Next Word</button>
+                    <div class="score">Score: <span id="spelling-score">0</span></div>
+                </div>
+            </section>
+
+            <!-- Colors Section -->
+            <section id="colors">
+                <h2>Color Matching</h2>
+                <div class="game-container">
+                    <div class="color-prompt">
+                        <span>Find the color: </span>
+                        <span id="color-to-find">Red</span>
+                    </div>
+                    <div class="color-options" id="color-options"></div>
+                    <div id="color-result" class="result"></div>
+                    <button id="next-color">Next Color</button>
+                    <div class="score">Score: <span id="color-score">0</span></div>
+                </div>
+            </section>
+
+            <!-- Animals Section -->
+            <section id="animals">
+                <h2>Animal Sounds</h2>
+                <div class="game-container">
+                    <div class="animal-container" id="animal-container"></div>
+                    <div class="animal-question">
+                        <p>Which animal makes this sound?</p>
+                        <button id="play-sound"><i class="fas fa-volume-up"></i> Play Sound</button>
+                    </div>
+                    <div class="animal-options" id="animal-options"></div>
+                    <div id="animal-result" class="result"></div>
+                    <button id="next-animal">Next Animal</button>
+                    <div class="score">Score: <span id="animal-score">0</span></div>
+                </div>
+            </section>
+
+            <!-- Flashcards Section -->
+            <section id="flashcards">
+                <h2>Flashcards</h2>
+                <div class="game-container">
+                    <div class="flashcard-container">
+                        <div class="flashcard" id="flashcard">
+                            <div class="flashcard-front">
+                                <img id="flashcard-image" src="images/flashcards/apple.png" alt="Flashcard">
+                            </div>
+                            <div class="flashcard-back">
+                                <span id="flashcard-text">Apple</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flashcard-controls">
+                        <button id="flip-card"><i class="fas fa-sync-alt"></i> Flip Card</button>
+                        <button id="next-card"><i class="fas fa-arrow-right"></i> Next Card</button>
+                    </div>
+                    <div class="flashcard-category">
+                        <label for="card-category">Category:</label>
+                        <select id="card-category">
+                            <option value="animals">Animals</option>
+                            <option value="shapes">Shapes</option>
+                            <option value="numbers">Numbers</option>
+                            <option value="colors">Colors</option>
+                        </select>
+                    </div>
+                    <div class="score">Cards Viewed: <span id="flashcard-score">0</span></div>
+                </div>
+            </section>
+
+            <!-- Matching Game Section -->
+            <section id="matching">
+                <h2>Memory Match</h2>
+                <div class="game-container">
+                    <div class="matching-info">
+                        <div class="matching-score">Matches: <span id="matching-score">0</span></div>
+                        <div class="matching-moves">Moves: <span id="matching-moves">0</span></div>
+                    </div>
+                    <div class="matching-grid" id="matching-grid"></div>
+                    <div class="matching-controls">
+                        <button id="restart-matching"><i class="fas fa-redo"></i> Restart Game</button>
+                        <div class="difficulty-selector">
+                            <label for="difficulty">Difficulty:</label>
+                            <select id="difficulty">
+                                <option value="easy">Easy (8 cards)</option>
+                                <option value="medium">Medium (12 cards)</option>
+                                <option value="hard">Hard (16 cards)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="matching-result" class="result"></div>
+                </div>
+            </section>
+            <!-- Quiz Section -->
+            <section id="quiz">
+                <h2>Fun Quiz Challenge</h2>
+                <div class="game-container">
+                    <div class="quiz-question" id="quiz-question">Which animal says "Moo"?</div>
+                    <div class="quiz-options" id="quiz-options">
+                        <!-- Options will be generated by JavaScript -->
+                    </div>
+                    <div id="quiz-result" class="result"></div>
+                    <button id="check-quiz">Check Answer</button>
+                    <button id="next-quiz">Next Question</button>
+                    <div class="score">Score: <span id="quiz-score">0</span></div>
+                </div>
+            </section>
+
+           <!-- True/False Section with removed icons -->
+<section id="truefalse">
+    <h2>True or False Challenge</h2>
+    <div class="game-container">
+        <div class="truefalse-statement" id="truefalse-statement">A square has 4 sides.</div>
+        <div class="truefalse-options">
+            <button id="true-button" class="tf-button">True</button>
+            <button id="false-button" class="tf-button">False</button>
+        </div>
+        <div id="truefalse-result" class="result"></div>
+        <button id="next-truefalse">Next Statement</button>
+        <div class="score">Score: <span id="truefalse-score">0</span></div>
+    </div>
+</section>
+            
+
+            <!-- Word Scramble Section -->
+            <section id="wordscramble">
+                <h2>Word Scramble</h2>
+                <div class="game-container">
+                    <div class="word-scramble-container">
+                        <div class="image-container">
+                            <img id="scramble-image" src="images/wordscramble/default.png" alt="Word hint">
+                        </div>
+                        <div class="word-hint" id="word-hint">
+                            <span id="word-category">Animal</span>: <span id="word-clue">Lives in the jungle</span>
+                        </div>
+                        
+                        <!-- Scrambled letters area - for draggable version -->
+                        <div class="scrambled-letters" id="scrambled-letters"></div>
+                        
+                        <!-- Answer spaces - for draggable version -->
+                        <div class="answer-spaces" id="answer-spaces"></div>
+                        
+                        <!-- Text input option -->
+                        <div class="typing-answer">
+                            <label for="typed-answer">Type your answer:</label>
+                            <input type="text" id="typed-answer" placeholder="Type the unscrambled word">
+                        </div>
+                        
+                        <!-- Controls and feedback -->
+                        <div class="scramble-controls">
+                            <button id="check-scramble">Check Answer</button>
+                            <button id="next-scramble">Next Word</button>
+                            <button id="reveal-scramble">Reveal Answer</button>
+                            <button id="shuffle-scramble"><i class="fas fa-random"></i> Shuffle Letters</button>
+                        </div>
+                        
+                        <div id="scramble-result" class="result"></div>
+                        <div class="score">Score: <span id="scramble-score">0</span></div>
+                    </div>
+                </div>
+            </section>
+
+            
+
+        </main>
+
+        <div class="feedback">
+            <div id="celebration" class="celebration">
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="message">Great job!</div>
+            </div>
+        </div>
+  
+        </body>
+        </html>
+
+        <footer>
+            <p>Made with <i class="fas fa-heart"></i> for curious little minds by <i class="fas fa-heart"></i> Sandile Mosane</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- Add rewards system script -->
+<script src="rewards-system.js"></script>
+
+<!-- Add this script to handle completion of activities -->
+<script>
+    // Example function to award points when activities are completed
+    function completeActivity(activityName, pointsToAward) {
+        awardPoints(pointsToAward);
+        
+        // Award badges based on activities
+        if (activityName === "Math Fun" && pointsToAward >= 10) {
+            awardBadge("Math Star");
+        } else if (activityName === "Spelling" && pointsToAward >= 10) {
+            awardBadge("Spelling Bee");
+        } else if (activityName === "Colors" && pointsToAward >= 10) {
+            awardBadge("Color Expert");
+        } else if (activityName === "Animals" && pointsToAward >= 10) {
+            awardBadge("Animal Friend");
+        } else if (activityName === "Quiz" && pointsToAward >= 10) {
+            awardBadge("Quiz Master");
+        } else if (activityName === "Matching" && pointsToAward >= 10) {
+            awardBadge("Memory Champion");
+        } else if (activityName === "Word Scramble" && pointsToAward >= 10) {
+            awardBadge("Word Wizard");
+        } else if (activityName === "Drawing" && pointsToAward >= 10) {
+            awardBadge("Creative Artist");
+        }
+    }
+    
+    // Add click listeners to your activity buttons
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all the activity buttons
+        const activityButtons = document.querySelectorAll('.math-fun, .spelling, .colors, .animals, .flashcards, .matching, .quiz, .true-false, .word-scramble, .videos, .drawing');
+        
+        // Add event listeners to each button
+        activityButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // You'd call this function when the activity is completed, not when clicked
+                // This is just a demonstration
+                // completeActivity(button.textContent, 5);
+            });
+        });
+    });
+</script>
+</body>
+</html>
+
+
+

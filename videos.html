@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Learning Videos</title>
+    <link rel="stylesheet" href="videos.css">
+</head>
+<body>
+    <div class="header">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <h1>Fun Learning Videos</h1>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="nav-button" onclick="window.location.href='index.html'">Home</button>
+        <button class="nav-button active">Videos</button>
+    </div>
+
+    <div class="content-area">
+        <h2>Educational Videos for Kids</h2>
+        
+        <div class="category-filter">
+            <button class="category-btn active" data-category="all">All Videos</button>
+            <button class="category-btn" data-category="math">Math</button>
+            <button class="category-btn" data-category="science">Science</button>
+            <button class="category-btn" data-category="animals">Animals</button>
+            <button class="category-btn" data-category="space">Space</button>
+            <button class="category-btn" data-category="language">Language</button>
+        </div>
+
+        <div class="video-container" id="videoContainer">
+            <!-- Videos will be loaded here via JavaScript -->
+        </div>
+    </div>
+
+    <div class="video-player-modal" id="videoPlayerModal">
+        <div class="video-player-content">
+            <button class="close-video-btn" onclick="closeVideoPlayer()">&times;</button>
+            <iframe id="videoIframe" class="video-iframe" src="" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script src="videos.js"></script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Time - Fun Learning World</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #e6f7ff;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background-color: #ff9aa2;
+            padding: 15px;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #6a4c93;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        .story-selection {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .story-card {
+            background-color: #ffd6a5;
+            width: 200px;
+            height: 200px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .story-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .story-card img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        
+        .story-card p {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #6a4c93;
+            text-align: center;
+            margin: 0;
+        }
+        
+        .story-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .story-content h2 {
+            color: #6a4c93;
+            text-align: center;
+            margin-top: 0;
+        }
+        
+        .story-page {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .story-image {
+            width: 300px;
+            height: 200px;
+            background-color: #fdffb6;
+            border-radius: 10px;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: #6a4c93;
+        }
+        
+        .story-text {
+            flex: 1;
+            font-size: 1.2em;
+            line-height: 1.5;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            background-color: #9bf6ff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            color: #6a4c93;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #6a4c93;
+            color: white;
+        }
+        
+        .back-button {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Story Time</h1>
+    </div>
+    
+    <div class="container">
+        <div class="story-selection">
+            <div class="story-card" onclick="showStory('forest')">
+                <img src="assets/images/forest advanture for kids.png" alt="Forest Adventure">
+                <p>Forest Adventure</p>
+            </div>
+            <div class="story-card" onclick="showStory('space')">
+                <img src="assets/images/space journey.png" alt="Space Journey">
+                <p>Space Journey</p>
+            </div>
+            <div class="story-card" onclick="showStory('ocean')">
+                <img src="assets/images/ocean friends.png" alt="Ocean Friends">
+                <p>Ocean Friends</p>
+            </div>
+            <div class="story-card" onclick="showStory('farm')">
+                <img src="assets/images/farm.png" alt="Farm Day">
+                <p>Farm Day</p>
+            </div>
+        </div>
+        
+        <div id="forest-story" class="story-content">
+            <h2>Forest Adventure</h2>
+            <div class="story-page" id="forest-page-1">
+                <div class="story-image">Page 1</div>
+                <div class="story-text">
+                    Once upon a time, there was a little rabbit named Asanda. Asanda lived in a big forest with many trees and flowers.
+                </div>
+            </div>
+            <div class="story-page" id="forest-page-2" style="display: none;">
+                <div class="story-image">Page 2</div>
+                <div class="story-text">
+                    One day, Asanda decided to go on an adventure. He wanted to find the tallest tree in the forest.
+                </div>
+            </div>
+            <div class="story-page" id="forest-page-3" style="display: none;">
+                <div class="story-image">Page 3</div>
+                <div class="story-text">
+                    Asanda met many friends on his journey. First, he met Sandile the Owl who was very wise.
+                </div>
+            </div>
+            <div class="story-page" id="forest-page-4" style="display: none;">
+                <div class="story-image">Page 4</div>
+                <div class="story-text">
+                    Sandile told Asanda that the tallest tree was at the top of the hill. Asanda thanked Sandile and continued his adventure.
+                </div>
+            </div>
+            <div class="story-page" id="forest-page-5" style="display: none;">
+                <div class="story-image">Page 5</div>
+                <div class="story-text">
+                    At the end of the day, Asanda found the tallest tree. It was so tall that it seemed to touch the sky! Asanda was very happy.
+                </div>
+            </div>
+            <div class="navigation">
+                <button onclick="previousPage('forest')">Previous</button>
+                <button onclick="nextPage('forest')">Next</button>
+                <button onclick="readAloud('forest')">Read Aloud</button>
+            </div>
+            <button class="back-button" onclick="backToSelection()">Back to Stories</button>
+            <button class="nav-button" onclick="window.location.href='index.html'">Home</button>
+        </div>
+        
+        <div id="space-story" class="story-content">
+            <h2>Space Journey</h2>
+            <div class="story-page" id="space-page-1">
+                <div class="story-image">Page 1</div>
+                <div class="story-text">
+                    Zoe wanted to be an astronaut. She loved looking at the stars through her telescope.
+                </div>
+            </div>
+            <div class="story-page" id="space-page-2" style="display: none;">
+                <div class="story-image">Page 2</div>
+                <div class="story-text">
+                    One night, Zoe saw a shooting star. She made a wish to visit outer space.
+                </div>
+            </div>
+            <div class="story-page" id="space-page-3" style="display: none;">
+                <div class="story-image">Page 3</div>
+                <div class="story-text">
+                    Suddenly, a friendly alien appeared! "Hello," said the alien. "My name is Blip. Would you like to visit space?"
+                </div>
+            </div>
+            <div class="story-page" id="space-page-4" style="display: none;">
+                <div class="story-image">Page 4</div>
+                <div class="story-text">
+                    Zoe and Blip flew in a spaceship. They visited the Moon, Mars, and even Saturn with its beautiful rings!
+                </div>
+            </div>
+            <div class="story-page" id="space-page-5" style="display: none;">
+                <div class="story-image">Page 5</div>
+                <div class="story-text">
+                    When it was time to go home, Zoe thanked Blip for the amazing adventure. She promised to keep looking at the stars.
+                </div>
+            </div>
+            <div class="navigation">
+                <button onclick="previousPage('space')">Previous</button>
+                <button onclick="nextPage('space')">Next</button>
+                <button onclick="readAloud('space')">Read Aloud</button>
+            </div>
+            <button class="back-button" onclick="backToSelection()">Back to Stories</button>
+        </div>
+        
+        <div id="ocean-story" class="story-content">
+            <h2>Ocean Friends</h2>
+            <div class="story-page" id="ocean-page-1">
+                <div class="story-image">Page 1</div>
+                <div class="story-text">
+                    Deep in the blue ocean lived a little fish named Finn. Finn had beautiful rainbow scales that sparkled in the sunlight.
+                </div>
+            </div>
+            <div class="story-page" id="ocean-page-2" style="display: none;">
+                <div class="story-image">Page 2</div>
+                <div class="story-text">
+                    Finn loved to explore the coral reef with his best friend, Shelly the sea turtle.
+                </div>
+            </div>
+            <div class="story-page" id="ocean-page-3" style="display: none;">
+                <div class="story-image">Page 3</div>
+                <div class="story-text">
+                    One day, they found a treasure chest! It was covered in seaweed and looked very old.
+                </div>
+            </div>
+            <div class="story-page" id="ocean-page-4" style="display: none;">
+                <div class="story-image">Page 4</div>
+                <div class="story-text">
+                    When they opened the chest, they found a map! The map showed the way to the magical underwater castle.
+                </div>
+            </div>
+            <div class="story-page" id="ocean-page-5" style="display: none;">
+                <div class="story-image">Page 5</div>
+                <div class="story-text">
+                    Finn and Shelly followed the map and found the castle. Inside, they met the King of the Ocean who made them guardians of the reef!
+                </div>
+            </div>
+            <div class="navigation">
+                <button onclick="previousPage('ocean')">Previous</button>
+                <button onclick="nextPage('ocean')">Next</button>
+                <button onclick="readAloud('ocean')">Read Aloud</button>
+            </div>
+            <button class="back-button" onclick="backToSelection()">Back to Stories</button>
+        </div>
+
+        <div id="farm-story" class="story-content">
+            <h2>Farm Day</h2>
+            <div class="story-page" id="farm-page-1">
+                <div class="story-image">Page 1</div>
+                <div class="story-text">
+                    Emma was visiting her grandparents' farm for the summer. She was excited to see all the animals.
+                </div>
+            </div>
+            <div class="story-page" id="farm-page-2" style="display: none;">
+                <div class="story-image">Page 2</div>
+                <div class="story-text">
+                    In the morning, Emma helped collect eggs from the chicken coop. The hens clucked happily as she thanked them.
+                </div>
+            </div>
+            <div class="story-page" id="farm-page-3" style="display: none;">
+                <div class="story-image">Page 3</div>
+                <div class="story-text">
+                    Next, Emma helped feed the cows. The cows gave fresh milk which Grandma used to make delicious cheese.
+                </div>
+            </div>
+            <div class="story-page" id="farm-page-4" style="display: none;">
+                <div class="story-image">Page 4</div>
+                <div class="story-text">
+                    After lunch, Emma helped water the vegetables in the garden. She saw carrots, tomatoes, and big green lettuce.
+                </div>
+            </div>
+            <div class="story-page" id="farm-page-5" style="display: none;">
+                <div class="story-image">Page 5</div>
+                <div class="story-text">
+                    At the end of the day, Emma's grandparents thanked her for being such a good helper. Emma loved her day on the farm!
+                </div>
+            </div>
+            <div class="navigation">
+                <button onclick="previousPage('farm')">Previous</button>
+                <button onclick="nextPage('farm')">Next</button>
+                <button onclick="readAloud('farm')">Read Aloud</button>
+            </div>
+            <button class="back-button" onclick="backToSelection()">Back to Stories</button>
+        </div>
+    </div>
+    
+    <script>
+        // Variables to track current page for each story
+        let forestPage = 1;
+        let spacePage = 1;
+        let oceanPage = 1;
+        let farmPage = 1;
+        
+        // Show the selected story
+        function showStory(storyId) {
+            // Hide all story content
+            document.querySelectorAll('.story-content').forEach(element => {
+                element.style.display = 'none';
+            });
+            
+            // Hide story selection
+            document.querySelector('.story-selection').style.display = 'none';
+            
+            // Show selected story
+            document.getElementById(storyId + '-story').style.display = 'block';
+            
+            // Reset page counters
+            forestPage = 1;
+            spacePage = 1;
+            oceanPage = 1;
+            farmPage = 1;
+            
+            // Show first page of each story
+            showPage('forest', 1);
+            showPage('space', 1);
+            showPage('ocean', 1);
+            showPage('farm', 1);
+        }
+        
+        // Show a specific page of a story
+        function showPage(storyId, pageNum) {
+            // Hide all pages of the story
+            document.querySelectorAll(`#${storyId}-story .story-page`).forEach(element => {
+                element.style.display = 'none';
+            });
+            
+            // Show the requested page
+            document.getElementById(`${storyId}-page-${pageNum}`).style.display = 'flex';
+        }
+        
+        // Navigate to the next page
+        function nextPage(storyId) {
+            let currentPage;
+            let maxPage = 5; // All stories have 5 pages
+            
+            // Determine which story we're navigating
+            switch(storyId) {
+                case 'forest':
+                    if (forestPage < maxPage) {
+                        forestPage++;
+                        showPage('forest', forestPage);
+                    }
+                    break;
+                case 'space':
+                    if (spacePage < maxPage) {
+                        spacePage++;
+                        showPage('space', spacePage);
+                    }
+                    break;
+                case 'ocean':
+                    if (oceanPage < maxPage) {
+                        oceanPage++;
+                        showPage('ocean', oceanPage);
+                    }
+                    break;
+                case 'farm':
+                    if (farmPage < maxPage) {
+                        farmPage++;
+                        showPage('farm', farmPage);
+                    }
+                    break;
+            }
+        }
+        
+        // Navigate to the previous page
+        function previousPage(storyId) {
+            // Determine which story we're navigating
+            switch(storyId) {
+                case 'forest':
+                    if (forestPage > 1) {
+                        forestPage--;
+                        showPage('forest', forestPage);
+                    }
+                    break;
+                case 'space':
+                    if (spacePage > 1) {
+                        spacePage--;
+                        showPage('space', spacePage);
+                    }
+                    break;
+                case 'ocean':
+                    if (oceanPage > 1) {
+                        oceanPage--;
+                        showPage('ocean', oceanPage);
+                    }
+                    break;
+                case 'farm':
+                    if (farmPage > 1) {
+                        farmPage--;
+                        showPage('farm', farmPage);
+                    }
+                    break;
+            }
+        }
+        
+        // Go back to story selection
+        function backToSelection() {
+            // Hide all story content
+            document.querySelectorAll('.story-content').forEach(element => {
+                element.style.display = 'none';
+            });
+            
+            // Show story selection
+            document.querySelector('.story-selection').style.display = 'flex';
+        }
+        
+        // Read the story aloud
+        function readAloud(storyId) {
+            let currentPage;
+            
+            // Determine which story we're reading
+            switch(storyId) {
+                case 'forest':
+                    currentPage = forestPage;
+                    break;
+                case 'space':
+                    currentPage = spacePage;
+                    break;
+                case 'ocean':
+                    currentPage = oceanPage;
+                    break;
+                case 'farm':
+                    currentPage = farmPage;
+                    break;
+            }
+            
+            // Get the text of the current page
+            const textElement = document.querySelector(`#${storyId}-page-${currentPage} .story-text`);
+            const text = textElement.innerText;
+            
+            // Use the Web Speech API to read the text aloud
+            const speech = new SpeechSynthesisUtterance();
+            speech.text = text;
+            speech.rate = 0.8; // Slightly slower for kids
+            speech.pitch = 1.2; // Slightly higher pitch for a friendlier voice
+            
+            // Stop any current speech before starting a new one
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+</body>
+</html>
